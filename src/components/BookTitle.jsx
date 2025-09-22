@@ -15,7 +15,10 @@ const BookTitle = ({ title }) => {
       <p>Genre: {data.book.genre.join(", ")}</p>
     </div>
   ) : (
-    <div>{loading && <p>loading...</p>}</div>
+    <div>
+      <div>{loading && <p>loading...</p>}</div>
+      <div>{error && <p>{error}</p>}</div>
+    </div>
   );
 };
 
