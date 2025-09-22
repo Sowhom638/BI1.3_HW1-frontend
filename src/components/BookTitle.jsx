@@ -3,7 +3,7 @@ import useFetch from "../../useFetch";
 
 const BookTitle = ({ title }) => {
   const { data, loading, error } = useFetch(
-    `https://bi-1-3-hw-1-deployment.vercel.app/books/${title}`
+    `https://bi-1-3-hw-1-backend.vercel.app/books/${title}`
   );
   console.log(data);
 

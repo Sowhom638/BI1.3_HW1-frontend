@@ -3,7 +3,7 @@ import useFetch from "../../useFetch";
 
 const BookByAuthor = ({author}) => {
     const { data, loading, error } = useFetch(
-        `https://bi-1-3-hw-1-deployment.vercel.app/books/authors/${author}`
+        `https://bi-1-3-hw-1-backend.vercel.app/books/authors/${author}`
       );
       console.log(data)
   return (
