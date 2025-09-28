@@ -5,23 +5,38 @@ const AddBookForm = () => {
     title: "",
     author: "",
     publishedYear: "",
-    genre: "",
+    genre: [],
     language: "",
     country: "",
     rating: "",
     summary: "",
     coverImageUrl: "",
   });
-
+  const genreOptions = [
+    'Fiction',
+    'Business',
+    'Non-Fiction',
+    'Mystery',
+    'Thriller',
+    'Science Fiction',
+    'Fantasy',
+    'Romance',
+    'Historical',
+    'Autobiography',
+    'Biography',
+    'Self-help',
+    'Other'
+  ];
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]:
-        name === "publishedYear" || name === "rating"
-          ? parseInt(value)
-          : value,
-    }));
+    if (name === "publishedYear" || name === "rating") {
+      setFormData((prev) => ({ ...prev, [name]: parseInt(value) || 0 }));
+    } else if (name === "genre") {
+      const selected = Array.from(e.target.selectedOptions, (opt) => opt.value);
+      setFormData((prev) => ({ ...prev, genres: selected }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -86,15 +101,26 @@ const AddBookForm = () => {
           />
         </div>
 
-        <div>
-          <label>Genre:</label>
-          <input
-            type="text"
+        <div className="mb-3">
+          <label htmlFor="genres" className="form-label">
+            Genres * <small className="text-muted">(Hold Ctrl/Cmd to select multiple)</small>
+          </label><br/>
+          <select
+            className="form-select"
+            id="genres"
             name="genre"
-            value={formData.genre}
+            multiple
+            value={formData.genres}
             onChange={handleChange}
             required
-          />
+            size="5"
+          >
+            {genreOptions.map((genre) => (
+              <option key={genre} value={genre}>
+                {genre}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div>
